@@ -58,7 +58,8 @@ public class Item_Order {
 		String color;
 		String finisht;
 		int num = 1;
-		int total = 0 ;
+		int total = 0;
+		boolean gcn = false;
 		boolean finish = true;
 		boolean error = false;
 		
@@ -70,6 +71,7 @@ public class Item_Order {
 					System.out.print("\n" + "The selected option is invalid. Please try again." + "\n\n");
 				}
 				
+				gcn = false;
 				error = false;
 				System.out.print("Select the item the customer would like to order:" + "\n\n"
 				+ "1. Joycon Controller." + "\n"
@@ -92,6 +94,7 @@ public class Item_Order {
 					case "3":
 						item = "Gamecube Controller";
 						total = 20;
+						gcn = true;
 						break;
 					default:
 						error = true;
@@ -109,9 +112,13 @@ public class Item_Order {
 				System.out.print("\n" + "Select the color the customer would like to order:" + "\n\n"
 				+ "1. Black." + "\n"
 				+ "2. White." + "\n"
-				+ "3. Red/Blue." + "\n"
-				+ "4. Blue" + "\n\n"
-				+ "Select a number: ");
+				+ "3. Red/Blue." + "\n");
+				
+				if (gcn) {
+					System.out.print("4. Blue." + "\n");
+				}
+				
+				System.out.print("\n" + "Select a number: ");
 				color = sc.nextLine();	
 				
 				switch (color) {
@@ -129,6 +136,10 @@ public class Item_Order {
 					color = "Blue";
 					break;
 				default:
+					error = true;
+				}
+				
+				if (!(gcn) && (color == "Blue")) {
 					error = true;
 				}
 				
@@ -165,19 +176,17 @@ public class Item_Order {
 				
 				error = false;
 				finish = true;
-				System.out.print("\n" + "Planning to order something else?" + "\n"
-				+ "1. Yes." + "\n"
-				+ "2. No." + "\n\n"
-				+ "Select a number: ");
+				System.out.print("\n" + "Planning to order something else?" + "\n\n"
+				+ "Type 'yes' to continue or 'no' to finish the program: ");
 				finisht = sc.nextLine();
 				
 				switch (finisht) {
 				
-				case "1":
+				case "yes":
 					System.out.print("\n" + "Restarting..." + "\n\n");
 					finish = false;
 					break;
-				case "2":
+				case "no":
 					System.out.println("\n" + "Program finished!");
 					break;
 				default:
